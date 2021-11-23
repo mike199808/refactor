@@ -1,19 +1,24 @@
-// global.js
-const defaultOwner = {
-    firstName: 'mike1',
-    lastName: 'mike2'
+function renderPerson(person) {
+    const result = [];
+    result.push(`<p>${person.name}</p>`);
+    result.push(emitPhotoData(person.photo));
+    return result.join('\n');
 }
-// 给全局数据设置get函数
-function getDefaultOwner() {
-    return Object.assign({}, defaultOwner);
+
+function photoDiv(photo) {
+    return ['<div>', emitPhotoData(photo), '</div>'].join('\n');
 }
-// 给全局数据设置set函数
-function setDefaultOwner(firstName, lastName) {
-    defaultOwner.firstName = firstName;
-    defaultOwner.lastName = lastName;
+
+// 新函数名字改成旧函数
+function emitPhotoData(aPhoto) {
+    const result = [];
+    result.push(`<p>title: ${aPhoto.title}</p>`); // 重复语句移入新函数中
+    result.push(`<p>location: ${aPhoto.location}</p>`);
+    result.push(`<p>date: ${aPhoto.date}</p>`);
+    return result.join('\n');
 }
 
 module.exports = {
-    getDefaultOwner,
-    setDefaultOwner,
-};
+    renderPerson,
+    photoDiv,
+}

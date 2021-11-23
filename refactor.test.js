@@ -1,13 +1,31 @@
-const {getDefaultOwner, setDefaultOwner} = require('./refactor-after');
+const {renderPerson, photoDiv} = require('./refactor-after');
 
- 
-test('过长参数列表——封装变量——通过get函数获取全局数据', () => {    
-  expect(getDefaultOwner()).toEqual({"firstName": "mike1", "lastName": "mike2"})
+describe('代码换味道——重复代码', () => {
+  test('代码坏味道——重复代码——提炼函数1', () => {
+    const input = {
+      name: 'mike',
+      photo: {
+        title: 'travel',
+        location: 'tokyo',
+        date: '2021-11-22'
+      }
+    };
+
+    const result = renderPerson(input);
+
+    expect(result).toBe(`<p>mike</p>\n<p>title: travel</p>\n<p>location: tokyo</p>\n<p>date: 2021-11-22</p>`);
+  });
+
+  test('代码坏味道——重复代码——提炼函数2', () => {
+    const input = {
+      title: 'adventure',
+      location: 'india',
+      date: '2021-11-22'
+    };
+
+    const result = photoDiv(input);
+
+    expect(result).toBe(`<div>\n<p>title: adventure</p>\n<p>location: india</p>\n<p>date: 2021-11-22</p>\n</div>`);
+  });
 });
-test('过长参数列表——封装变量——通过set函数来设置全局数据', () => {
-  setDefaultOwner('mike1set','mike1set');
-  expect(getDefaultOwner()).toEqual({
-    firstName: 'mike1set',
-    lastName: 'mike1set'
-  })
-})
+
