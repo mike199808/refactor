@@ -1,29 +1,23 @@
-function printOwing(invoice) {
-    let outstanding = 0;
-
-    console.log("************************");
-    console.log("***** Customer Ows *****");
-    console.log("************************");
-
-    // calculate outstanding
-    for (const o of invoice.orders) {
-        outstanding += o.amount;
+class Order {
+    constructor(quantity, itemPrice) {
+        this.quantity = quantity;
+        this.itemPrice = itemPrice;
     }
 
-    // record due date
-    const today = new Date();
-    invoice.dueDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 30);
+    get finalPrice() {
+        const basePrice = this.quantity * this.itemPrice;
+        let discountLevel;
+        if (this.quantity > 100) discountLevel = 2;
+        else discountLevel = 1;
+        return this.discountedPrice(basePrice, discountLevel);
+    }
 
-    // print details
-    console.log(`name: ${invoice.customer}`);
-    console.log(`amount: ${outstanding}`);
-    console.log(`due: ${invoice.dueDate.toString()}`);
+    discountedPrice(basePrice, discountLevel) {
+        switch(discountLevel) {
+            case 1: return basePrice * 0.95;
+            case 2: return basePrice * 0.9;
+        }
+    }
 }
 
-printOwing({
-    customer: 'mike',
-    orders: [
-        {amount: 10},
-        {amount: 20}
-    ]
-})
+module.exports = Order;
