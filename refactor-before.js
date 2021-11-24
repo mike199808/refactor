@@ -1,8 +1,9 @@
-function mergeObject(target, source) {
-    for (const key in source) {
-        target[key] = source[key];
-    }
-    return target;
+function priceOrder(product, quantity, shippingMethod) {
+    const basePrice = product.basePrice * quantity;
+    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
+    const shippingPerCase = (basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountedFee : shippingMethod.feePerCase;
+    const shippingCost = quantity * shippingPerCase;
+    const price = basePrice - discount + shippingCost;
+    return price;
 }
-
-module.exports = mergeObject;
+module.exports = priceOrder
