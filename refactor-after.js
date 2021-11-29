@@ -1,54 +1,33 @@
-reading = { customer: 'ivan', quantity: 10, month: 5, year: 2017};
-function acquireReading() {
-    return {
-        ...reading
-    }
-}
-
-class Reading {
+class Account {
     constructor(data) {
-        this._customer = data.customer;
-        this._quantity = data.quantity;
-        this._month = data.month;
-        this._year = data.year;
-    }
-    get customer() {
-        return this._customer;
-    }
-    get quantity() {
-        return this._quantity;
-    }
-    get month() {
-        return this._month;
-    }
-    get year() {
-        return this._year;
+        this._name = data.name;
+        this._type = data.type;
     }
 
-    get baseCharge() {
-        return this.month * this.year * this.quantity;
-    }
-    get taxableCharge() {
-        return Math.max(0, this.baseCharge - this.year);
+    get loanAmount() {
+        return this._type.loanAmount;
     }
 }
 
-function client1() {
-    const aReading = new Reading(acquireReading());
-    return aReading.baseCharge;
+class AccountType {
+    constructor(type) {
+        this._type = type;
+    }
+
+    get type() {
+        return this._type;
+    }
+
+    get loanAmount() {
+        if (this._type === 'vip') {
+            return 2000;
+        } else {
+            return 1000;
+        }
+    }
 }
 
-function client2() {
-    const aReading = new Reading(acquireReading());
-    return aReading.taxableCharge;
-}
-
-function client3() {
-    const aReading = new Reading(acquireReading());
-    return aReading.baseCharge;
-}
 module.exports = {
-    client1,
-    client2,
-    client3,
+    Account,
+    AccountType,
 }
