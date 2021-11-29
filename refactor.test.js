@@ -1,20 +1,8 @@
-const {Account, AccountType} = require('./refactor-after');
+const { Person } = require('./refactor-after');
 
-describe('代码坏味道——依赖情结——搬移函数', () => {
-  test('普通账号贷款额度', () => {
-    let input = {
-      name: 'mike',
-      type: new AccountType('normal')
-    }
-    const result = new Account(input);
-    expect(result.loanAmount).toBe(1000)
-  })
-  test('vip账号贷款额度', () => {
-    let input = {
-      name: 'mike',
-      type: new AccountType('vip')
-    }
-    const result = new Account(input);
-    expect(result.loanAmount).toBe(2000)
+describe('代码坏味道——数据泥团——提炼类', () => {
+  test('提炼类', () => {
+    const result = new Person('mike', 123, 456789);
+    expect(result.telephoneNumber).toBe("mike：(123)456789")
   })
 })

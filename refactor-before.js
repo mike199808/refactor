@@ -1,29 +1,19 @@
-class Account {
-    constructor(data) {
-        this._name = data.name;
-        this._type = data.type;
+class Person {
+    constructor(name, officeAreaCode, officeNumber) {
+        this._name = name;
+        this._officeAreaCode = officeAreaCode;
+        this._officeNumber = officeNumber;
     }
 
-    get loanAmount() {
-        if (this._type.type === 'vip') {
-            return 2000;
-        } else {
-            return 1000;
-        }
-    }
-}
-
-class AccountType {
-    constructor(type) {
-        this._type = type;
-    }
-
-    get type() {
-        return this._type;
-    }
+    get name() {return this._name;}
+    set name(arg)  {return this._name = arg;}
+    get telephoneNumber() { return `${this.name}：(${this.officeAreaCode})${this.officeNumber}`;}
+    get officeAreaCode() {return this._officeAreaCode;}
+    set officeAreaCode(arg) { this._officeAreaCode = arg;}
+    get officeNumber() { return this._officeNumber;}
+    set officeNumber(arg) { this._officeNumber = arg;}
 }
 
 module.exports = {
-    Account,
-    AccountType,
+    Person,
 }

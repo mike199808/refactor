@@ -1,33 +1,46 @@
-class Account {
-    constructor(data) {
-        this._name = data.name;
-        this._type = data.type;
+class TelephoneNumber {
+    constructor(areaCode, number) {
+        this._areaCode = areaCode;
+        this._number = number
     }
 
-    get loanAmount() {
-        return this._type.loanAmount;
+    get areaCode() {
+        return this._areaCode;
+    }
+    set areaCode(arg) {
+        this._areaCode = arg;
+    }
+
+    get number() {
+        return this._number;
+    }
+    set number(arg) {
+        this._number = arg;
+    }
+
+    // 搬移telephoneNumber函数
+    get telephoneNumber() {
+        return `(${this.areaCode})${this.number}`
     }
 }
-
-class AccountType {
-    constructor(type) {
-        this._type = type;
+class Person {
+    constructor(name, officeAreaCode, officeNumber) {
+        this._name = name;
+        this._telephoneNumber = new TelephoneNumber(officeAreaCode, officeNumber)
     }
 
-    get type() {
-        return this._type;
+    get name() {return this._name;}
+    set name(arg)  {return this._name = arg;}
+    // get telephoneNumber() { return `${this.name}：(${this.officeAreaCode})${this.officeNumber}`;}
+    get telephoneNumber() {
+        return `${this.name}：${this._telephoneNumber.telephoneNumber}`
     }
-
-    get loanAmount() {
-        if (this._type === 'vip') {
-            return 2000;
-        } else {
-            return 1000;
-        }
-    }
+    get officeAreaCode() {return this._telephoneNumber.areaCode;}
+    set officeAreaCode(arg) { this._telephoneNumber.areaCode = arg;}
+    get officeNumber() { return this._telephoneNumber.number;}
+    set officeNumber(arg) { this._telephoneNumber.number = arg;}
 }
 
 module.exports = {
-    Account,
-    AccountType,
+    Person,
 }
