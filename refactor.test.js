@@ -1,17 +1,13 @@
-const priceOrder = require('./refactor-after');
+const {client1, client2, client3} = require('./refactor-after');
 
-test('代码坏味道——发散式变坏——拆分阶段', () => {
-  expect(priceOrder(
-    {
-      basePrice: 100,
-      discountThreshold: 10,
-      discountRate: 0.8
-    },
-    100,
-    {
-      discountThreshold: 99,
-      discountedFee: 99,
-      feePerCase: 101 
-    }
-  )).toBe(12700);
+describe('代码坏味道——霰弹式修改——函数组合成类', () => {
+  test('client1', () => {
+    expect(client1()).toBe(100850);
+  })
+  test('client2', () => {
+    expect(client2()).toBe(98833);
+  })
+  test('client3', () => {
+    expect(client3()).toBe(100850);
+  })
 })

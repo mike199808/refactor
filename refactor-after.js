@@ -1,19 +1,54 @@
-function applyShipping(priceData, shippingMethod) {
-    const shippingPerCase = (priceData.basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountedFee : shippingMethod.feePerCase;
-    const shippingCost = priceData.quantity * shippingPerCase;
-    const price = priceData.basePrice - priceData.discount + shippingCost;
-    return price;
+reading = { customer: 'ivan', quantity: 10, month: 5, year: 2017};
+function acquireReading() {
+    return {
+        ...reading
+    }
 }
 
-function calculatepriceData(product, quantity) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    return {basePrice: basePrice, quantity: quantity, discount: discount};
+class Reading {
+    constructor(data) {
+        this._customer = data.customer;
+        this._quantity = data.quantity;
+        this._month = data.month;
+        this._year = data.year;
+    }
+    get customer() {
+        return this._customer;
+    }
+    get quantity() {
+        return this._quantity;
+    }
+    get month() {
+        return this._month;
+    }
+    get year() {
+        return this._year;
+    }
+
+    get baseCharge() {
+        return this.month * this.year * this.quantity;
+    }
+    get taxableCharge() {
+        return Math.max(0, this.baseCharge - this.year);
+    }
 }
 
-function priceOrder(product, quantity, shippingMethod) {
-    const priceData = calculatepriceData(product, quantity);
-    const price = applyShipping(priceData, shippingMethod);
-    return price;
+function client1() {
+    const aReading = new Reading(acquireReading());
+    return aReading.baseCharge;
 }
-module.exports = priceOrder
+
+function client2() {
+    const aReading = new Reading(acquireReading());
+    return aReading.taxableCharge;
+}
+
+function client3() {
+    const aReading = new Reading(acquireReading());
+    return aReading.baseCharge;
+}
+module.exports = {
+    client1,
+    client2,
+    client3,
+}

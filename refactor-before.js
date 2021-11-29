@@ -1,9 +1,30 @@
-function priceOrder(product, quantity, shippingMethod) {
-    const basePrice = product.basePrice * quantity;
-    const discount = Math.max(quantity - product.discountThreshold, 0) * product.basePrice * product.discountRate;
-    const shippingPerCase = (basePrice > shippingMethod.discountThreshold) ? shippingMethod.discountedFee : shippingMethod.feePerCase;
-    const shippingCost = quantity * shippingPerCase;
-    const price = basePrice - discount + shippingCost;
-    return price;
+reading = { customer: 'ivan', quantity: 10, month: 5, year: 2017};
+function acquireReading() {
+    return {
+        ...reading
+    }
 }
-module.exports = priceOrder
+
+function client1() {
+    const aReading = acquireReading();
+    const baseCharge = aReading.month * aReading.year * aReading.quantity;
+    return baseCharge;
+}
+
+function client2() {
+    const aReading = acquireReading();
+    const baseCharge = aReading.month * aReading.year * aReading.quantity;
+    const taxableCharge = Math.max(0, baseCharge - aReading.year);
+    return taxableCharge;
+}
+
+function client3() {
+    const aReading = acquireReading();
+    const baseCharge = aReading.month * aReading.year * aReading.quantity;
+    return baseCharge;
+}
+module.exports = {
+    client1,
+    client2,
+    client3,
+}
