@@ -1,19 +1,18 @@
-class Person {
-    constructor(name, officeAreaCode, officeNumber) {
-        this._name = name;
-        this._officeAreaCode = officeAreaCode;
-        this._officeNumber = officeNumber;
+class Order {
+    constructor(data) {
+        this.priority = data.priority;
     }
-
-    get name() {return this._name;}
-    set name(arg)  {return this._name = arg;}
-    get telephoneNumber() { return `${this.name}：(${this.officeAreaCode})${this.officeNumber}`;}
-    get officeAreaCode() {return this._officeAreaCode;}
-    set officeAreaCode(arg) { this._officeAreaCode = arg;}
-    get officeNumber() { return this._officeNumber;}
-    set officeNumber(arg) { this._officeNumber = arg;}
 }
 
+function client1() {
+    const orders = [
+        new Order({priority: 'high'}),
+        new Order({priority: 'rush'}),
+        new Order({priority: 'low'}),
+        new Order({priority: 'normal'}),
+    ]
+    return orders.filter(o => "high" === o.priority || "rush" === o.priority).length
+}
 module.exports = {
-    Person,
+    client1,
 }

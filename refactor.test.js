@@ -1,8 +1,8 @@
-const { Person } = require('./refactor-after');
+const { client1 } = require('./refactor-after');
 
-describe('代码坏味道——数据泥团——提炼类', () => {
-  test('提炼类', () => {
-    const result = new Person('mike', 123, 456789);
-    expect(result.telephoneNumber).toBe("mike：(123)456789")
+describe('代码坏味道——基本类型偏执——以对象取代基本类型', () => {
+  test('test', () => {
+    const result = client1();
+    expect(result).toBe(2)
   })
 })
