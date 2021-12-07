@@ -1,18 +1,35 @@
-class Order {
-    constructor(data) {
-        this.priority = data.priority;
+function plumages(birds) {
+    return birds.map (b => [b.name, plumage(b)]);
+}
+function speeds(birds) {
+    return birds.map(b => [b.name, airSpeedVelocity(b)]);
+}
+function plumage(bird) {
+    switch(bird.type) {
+        case 'EuropeanSwallow':
+            return 'average';
+        case 'AfricanSwallow':
+            return (bird.numberOfCounts > 2) ? 'tired' : 'average';
+        case 'NorwegianBlueParrot':
+            return (bird.voltage > 100) ? "scorched" : "beautiful";
+        default:
+            return "unknown";
     }
 }
 
-function client1() {
-    const orders = [
-        new Order({priority: 'high'}),
-        new Order({priority: 'rush'}),
-        new Order({priority: 'low'}),
-        new Order({priority: 'normal'}),
-    ]
-    return orders.filter(o => "high" === o.priority || "rush" === o.priority).length
+function airSpeedVelocity(bird) {
+    switch(bird.type) {
+        case 'EuropeanSwallow':
+            return 35;
+        case 'AfricanSwallow':
+            return 40 - 2 * bird.numberOfCounts;
+        case 'NorwegianBlueParrot':
+            return (bird.isNailed) ? 0 : 10 + bird.voltage / 10;
+        default:
+            return null;
+    }
 }
 module.exports = {
-    client1,
+    plumages,
+    speeds,
 }
