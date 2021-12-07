@@ -1,62 +1,22 @@
-function plumages(birds) {
-    return birds.map (b => [b.name, createBird(b).plumage]);
+function acquireData(input) {
+    const lines = input.split('\n');
+    return loopItems = lines
+        .slice(1)
+        .filter(line => line.trim() !== "")
+        .map(line => line.split(","))
+        .filter(record => record[1].trim() === "India")
+        .map(record => ({city: record[0].trim(), phone: record[2].trim()}))
+        ;
 }
-function speeds(birds) {
-    return birds.map(b => [b.name, new createBird(b).airSpeedVelocity]);
+function client() {
+    const input = `office, country, telephone
+    Chicago, USA, +1 312 373 1000
+    Beijing, China, +86 4008 900 505
+    Bangalore, India, +91 80 4064 9570
+    Porto Alegre, Brazil, +55 51 3079 3550
+    Chennai, India, +91 44 660 44766`;
+    return acquireData(input);
 }
-
-function createBird(bird) {
-    switch(bird.type) {
-        case 'EuropeanSwallow':
-            return new EuropeanSwallow(bird);
-        case 'AfricanSwallow':
-            return new AfricanSwallow(bird);
-        case 'NorwegianBlueParrot':
-            return new NorwegianBlueParrot(bird);
-        default:
-            return new Bird(bird);
-    }
-}
-class Bird {
-    constructor(birdObject) {
-        Object.assign(this, birdObject);
-    }
-
-    get plumage() {
-        return "unknown"
-    }
-
-    get airSpeedVelocity() {
-        return null;
-    }
-}
-
-class EuropeanSwallow extends Bird {
-    get plumage() {
-        return 'average';
-    }
-    get airSpeedVelocity() {
-        return 35;
-    }
-}
-class AfricanSwallow extends Bird {
-    get plumage() {
-        return (this.numberOfCounts > 2) ? 'tired' : 'average';
-    }
-    get airSpeedVelocity() {
-        return 40 - 2 * this.numberOfCounts;
-    }
-}
-class NorwegianBlueParrot extends Bird {
-    get plumage() {
-        return (this.voltage > 100) ? "scorched" : "beautiful";
-    }
-    get airSpeedVelocity() {
-        return (this.isNailed) ? 0 : 10 + this.voltage / 10;
-    }
-}
- 
 module.exports = {
-    plumages,
-    speeds,
+    client
 }
