@@ -1,8 +1,12 @@
-const { client } = require('./refactor-after');
+const { reportLines } = require('./refactor-after');
 
-describe('代码坏味道——循环语句——以管道取代循环', () => {
+describe('代码坏味道——冗赘的元素——内联函数', () => {
 
-  test('client', () => {
-    expect(client()).toEqual([{"city": "Bangalore", "phone": "+91 80 4064 9570"}, {"city": "Chennai", "phone": "+91 44 660 44766"}])
+  test('reportLines', () => {
+    const aCustomer = {
+      name: 'mike',
+      location: '北京',
+    }
+    expect(reportLines(aCustomer)).toEqual([["name", "mike"], ["location", "北京"]]);
   })
 })
