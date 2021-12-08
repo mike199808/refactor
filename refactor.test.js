@@ -1,12 +1,7 @@
-const { reportLines } = require('./refactor-after');
+const { client } = require('./refactor-after');
 
-describe('代码坏味道——冗赘的元素——内联函数', () => {
-
-  test('reportLines', () => {
-    const aCustomer = {
-      name: 'mike',
-      location: '北京',
-    }
-    expect(reportLines(aCustomer)).toEqual([["name", "mike"], ["location", "北京"]]);
+describe('代码坏味道——夸夸奇谈通用性——内联类', () => {
+  test('client', () => {
+    expect(client()).toEqual('company2: 33');
   })
 })

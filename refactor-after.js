@@ -1,15 +1,22 @@
-function reportLines(aCustomer) {
-    const lines = [];
-    lines.push(["name", aCustomer.name]);
-    lines.push(["location", aCustomer.location]);
-    return lines;
+class Shipment {
+    constructor(shippingCompany, trackingNumber) {
+        this._shippingCompany = shippingCompany;
+        this._trackingNumber = trackingNumber;
+    }
+    get trackingInfo() {
+        return `${this.shippingCompany}: ${this.trackingNumber}`
+    }
+    get shippingCompany() {return this._shippingCompany;}
+    set shippingCompany(arg) {this._shippingCompany = arg;}
+    get trackingNumber() {return this._trackingNumber;}
+    set trackingNumber(arg) { this._trackingNumber = arg;}
 }
 
-function gatherCustomerData(out, aCustomer) {
-    out.push(["name", aCustomer.name]);
-    out.push(["location", aCustomer.location]);
+function client() {
+    const aShipment = new Shipment('company1', 33);
+    aShipment.shippingCompany = "company2";
+    return aShipment.trackingInfo;
 }
-
 module.exports = {
-    reportLines,
+    client,
 }
